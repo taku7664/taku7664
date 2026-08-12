@@ -41,8 +41,3 @@
     </td>
   </tr>
 </table>
-
-<h3>Activities</h3>
-
-- **2025 G-STAR** : *Vanishing Ground* 부스 전시
-- **2018 GIGDC** : *Hide In Color* 중고등부 제작부문 대상 🏆
