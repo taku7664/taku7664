@@ -1,8 +1,10 @@
-import { readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import sharp from "sharp";
 
-const CARD = process.env.CARD ?? ".pokerepo/card.md";
-const OUT = process.env.OUT ?? "party.svg";
+const CARD = ".pokerepo/card.md";
+const STATE = "trainer.json";
+const CARDS_DIR = "cards";
+const README = "README.md";
 
 const TYPE_COLORS = {
   normal: "#A8A77A", fire: "#EE8130", water: "#6390F0", electric: "#F7D02C",
@@ -27,98 +29,125 @@ async function json(url) {
 
 function parseParty(md) {
   const rows = [...md.matchAll(/<tr>([\s\S]*?)<\/tr>/g)].map((m) => m[1]);
-  const party = [];
+  const repos = [];
   for (let i = 0; i + 1 < rows.length; i += 2) {
     for (const td of rows[i + 1].matchAll(/<td[^>]*>([\s\S]*?)<\/td>/g)) {
-      const cell = td[1];
-      party.push({
-        id: Number(cell.match(/[?&]m=(\d+)/)[1]),
-        level: Number(cell.match(/Lv\.(\d+)/)[1]),
-        repo: cell.match(/title="([^"]+)"/)?.[1] ?? "",
-      });
+      repos.push(td[1].match(/title="([^"]+)"/)[1]);
     }
   }
-  return party;
+  return repos;
 }
 
-async function enrich(mon) {
-  const poke = await json(`https://pokeapi.co/api/v2/pokemon/${mon.id}`);
-  const species = await json(poke.species.url);
-  const ko = species.names.find((n) => n.language.name === "ko")?.name;
-  const en = species.names.find((n) => n.language.name === "en")?.name ?? poke.name;
-  const art = poke.sprites.other?.home?.front_default ?? poke.sprites.other?.["official-artwork"]?.front_default;
-  const png = await sharp(Buffer.from(await (await fetch(art)).arrayBuffer()))
-    .resize(160, 160, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
-    .png({ compressionLevel: 9 })
-    .toBuffer();
-  return {
-    ...mon,
-    name: ko ?? en,
-    types: poke.types.map((t) => t.type.name),
-    sprite: `data:image/png;base64,${png.toString("base64")}`,
-  };
+const speciesCache = new Map();
+function pokemon(id) {
+  if (!speciesCache.has(id)) speciesCache.set(id, (async () => {
+    const poke = await json(`https://pokeapi.co/api/v2/pokemon/${id}`);
+    const species = await json(poke.species.url);
+    const name = species.names.find((n) => n.language.name === "ko")?.name
+      ?? species.names.find((n) => n.language.name === "en")?.name ?? poke.name;
+    const art = poke.sprites.other?.home?.front_default ?? poke.sprites.other?.["official-artwork"]?.front_default;
+    const png = await sharp(Buffer.from(await (await fetch(art)).arrayBuffer()))
+      .resize(160, 160, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
+      .png({ compressionLevel: 9 })
+      .toBuffer();
+    return { name, types: poke.types.map((t) => t.type.name), sprite: `data:image/png;base64,${png.toString("base64")}` };
+  })());
+  return speciesCache.get(id);
 }
 
-function slot(mon, x, y, i) {
-  const W = 272, H = 136;
+const W = 272, H = 136, M = 6;
+
+function cardSvg(mon, delay) {
   const c1 = TYPE_COLORS[mon.types[0]] ?? "#888";
   const c2 = TYPE_COLORS[mon.types[1]] ?? c1;
   const repo = mon.repo.split("/").pop();
   const repoShort = repo.length > 22 ? repo.slice(0, 21) + "…" : repo;
   const bar = Math.max(4, Math.round((mon.level / 100) * 132));
   const chips = mon.types.map((t, k) => `
-      <g transform="translate(${118 + k * 58},76)">
-        <rect width="52" height="18" rx="9" fill="${TYPE_COLORS[t]}"/>
-        <text x="26" y="13" class="chip">${TYPE_KO[t] ?? t}</text>
-      </g>`).join("");
-  return `
-  <g transform="translate(${x},${y})">
-    <defs>
-      <linearGradient id="g${i}" x1="0" y1="0" x2="1" y2="1">
-        <stop offset="0" stop-color="${c1}" stop-opacity=".38"/>
-        <stop offset="1" stop-color="${c2}" stop-opacity=".10"/>
-      </linearGradient>
-      <radialGradient id="r${i}"><stop offset="0" stop-color="${c1}" stop-opacity=".55"/><stop offset="1" stop-color="${c1}" stop-opacity="0"/></radialGradient>
-    </defs>
-    <rect width="${W}" height="${H}" rx="18" fill="#161b22"/>
-    <rect width="${W}" height="${H}" rx="18" fill="url(#g${i})" stroke="${c1}" stroke-opacity=".45"/>
-    <circle cx="60" cy="68" r="56" fill="url(#r${i})"/>
-    <g class="float" style="animation-delay:${(i * 0.35).toFixed(2)}s">
-      <image href="${mon.sprite}" x="4" y="12" width="112" height="112"/>
-    </g>
-    <text x="118" y="34" class="name">${esc(mon.name)}</text>
-    <text x="118" y="56" class="lv">Lv.<tspan class="lvnum">${mon.level}</tspan></text>
-    ${chips}
-    <rect x="118" y="104" width="132" height="6" rx="3" fill="#ffffff" fill-opacity=".12"/>
-    <rect x="118" y="104" width="${bar}" height="6" rx="3" fill="${c1}"/>
-    <text x="118" y="126" class="repo">${esc(repoShort)}</text>
-  </g>`;
-}
-
-const md = await readFile(CARD, "utf8");
-const party = await Promise.all(parseParty(md).map(enrich));
-
-const COLS = 3, GAP = 14, PAD = 16, W = 272, H = 136;
-const rows = Math.ceil(party.length / COLS);
-const width = PAD * 2 + COLS * W + (COLS - 1) * GAP;
-const height = PAD * 2 + rows * H + (rows - 1) * GAP;
-
-const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
+    <g transform="translate(${118 + k * 58},76)">
+      <rect width="52" height="18" rx="9" fill="${TYPE_COLORS[t]}"/>
+      <text x="26" y="13" class="chip">${TYPE_KO[t] ?? t}</text>
+    </g>`).join("");
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${W + M * 2}" height="${H + M * 2}" viewBox="0 0 ${W + M * 2} ${H + M * 2}">
   <style>
     text { font-family: "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", Helvetica, Arial, sans-serif; }
     .name { font-size: 20px; font-weight: 700; fill: #f0f6fc; }
     .lv { font-size: 13px; font-weight: 600; fill: #8b949e; }
     .lvnum { font-size: 17px; font-weight: 800; fill: #f0f6fc; }
     .chip { font-size: 11px; font-weight: 700; fill: #fff; text-anchor: middle; }
-    .repo { font-size: 11px; fill: #8b949e; }
-    .float { animation: float 3s ease-in-out infinite; }
+    .repo { font-size: 11px; fill: #58a6ff; text-decoration: underline; }
+    .float { animation: float 3s ease-in-out infinite; animation-delay: ${delay}s; }
     @keyframes float { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-5px) } }
     @media (prefers-reduced-motion: reduce) { .float { animation: none } }
   </style>
-  <rect width="${width}" height="${height}" rx="22" fill="#0d1117"/>
-  ${party.map((m, i) => slot(m, PAD + (i % COLS) * (W + GAP), PAD + Math.floor(i / COLS) * (H + GAP), i)).join("")}
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="${c1}" stop-opacity=".38"/>
+      <stop offset="1" stop-color="${c2}" stop-opacity=".10"/>
+    </linearGradient>
+    <radialGradient id="r"><stop offset="0" stop-color="${c1}" stop-opacity=".55"/><stop offset="1" stop-color="${c1}" stop-opacity="0"/></radialGradient>
+  </defs>
+  <g transform="translate(${M},${M})">
+    <rect width="${W}" height="${H}" rx="18" fill="#161b22"/>
+    <rect width="${W}" height="${H}" rx="18" fill="url(#g)" stroke="${c1}" stroke-opacity=".45"/>
+    <circle cx="60" cy="68" r="56" fill="url(#r)"/>
+    <g class="float"><image href="${mon.sprite}" x="4" y="12" width="112" height="112"/></g>
+    <text x="118" y="34" class="name">${esc(mon.name)}</text>
+    <text x="118" y="56" class="lv">Lv.<tspan class="lvnum">${mon.level}</tspan></text>
+    ${chips}
+    <rect x="118" y="104" width="132" height="6" rx="3" fill="#ffffff" fill-opacity=".12"/>
+    <rect x="118" y="104" width="${bar}" height="6" rx="3" fill="${c1}"/>
+    <text x="118" y="126" class="repo">${esc(repoShort)}</text>
+  </g>
 </svg>
 `;
+}
 
-await writeFile(OUT, svg);
-console.log(`wrote ${OUT} (${party.length} mons, ${(svg.length / 1024).toFixed(0)} KB)`);
+const state = JSON.parse(await readFile(STATE, "utf8"));
+const login = state.login;
+const entry = (repo) => ({ repo, ...state.repos[repo] });
+
+const partyRepos = parseParty(await readFile(CARD, "utf8"));
+const party = partyRepos.map(entry);
+const rest = Object.keys(state.repos)
+  .filter((r) => state.repos[r].caught && !partyRepos.includes(r))
+  .map(entry)
+  .sort((a, b) => b.level - a.level || b.exp - a.exp);
+
+await rm(CARDS_DIR, { recursive: true, force: true });
+await mkdir(CARDS_DIR);
+
+async function render(list) {
+  return Promise.all(list.map(async (e, i) => {
+    const mon = { ...e, ...(await pokemon(e.mon)) };
+    const file = `${CARDS_DIR}/${e.repo.replace("/", "__")}.svg`;
+    await writeFile(file, cardSvg(mon, ((i % 3) * 0.35).toFixed(2)));
+    const tip = `${mon.name} · ${e.repo} · 커밋 ${e.commits}회 · 병합 PR ${e.merges}개`;
+    return `<a href="https://github.com/${e.repo}" title="${esc(tip)}"><img src="${file}" alt="${esc(mon.name)} Lv.${e.level}" width="32%"></a>`;
+  }));
+}
+
+const partyHtml = await render(party);
+const restHtml = await render(rest);
+
+const readme = `<div align="center">
+
+${partyHtml.join("\n")}
+
+</div>
+${restHtml.length ? `
+<details>
+<summary><b>나머지 포켓몬 ${restHtml.length}마리 더 보기</b></summary>
+<br>
+<div align="center">
+
+${restHtml.join("\n")}
+
+</div>
+</details>
+` : ""}
+<p align="right"><sub><a href="https://wantaekchoi.github.io/pokerepo/?u=${login}">${login}'s Dex</a></sub></p>
+`;
+
+await writeFile(README, readme);
+console.log(`party ${party.length}, rest ${rest.length}`);
