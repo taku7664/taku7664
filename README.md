@@ -1,9 +1,9 @@
 <!-- POKEREPO-CARDS:START -->
 <div align="center">
 
-<picture><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/_intro.svg?v=970e7a08" alt="안녕하세요. 포켓몬을 좋아하는 평범한 개발자 트레이너(?)입니다. 깃 활동을 통해 포켓몬 챔피언이 되는게 목표입니다." width="97%"></picture>
+<picture><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/_intro.svg?v=63b461f8" alt="안녕하세요. 포켓몬을 좋아하는 평범한 개발자 트레이너(?)입니다. 깃 활동을 통해 포켓몬 챔피언이 되는게 목표입니다." width="97%"></picture>
 
-<picture><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/_top.svg?v=6917c8ed" alt="" width="97%"></picture>
+<picture><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/_top.svg?v=894c5313" alt="" width="97%"></picture>
 
 <a href="https://github.com/Scarecrow37/VanishingGround" title="크로뱃 · Scarecrow37/VanishingGround · 커밋 500회 · 병합 PR 164개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/Scarecrow37__VanishingGround.svg?v=aece023b" alt="크로뱃 Lv.92" width="32%"></a>
 <a href="https://github.com/2024-4Q-Super-Project-Team/The-Project-J" title="바랜드 · 2024-4Q-Super-Project-Team/The-Project-J · 커밋 193회 · 병합 PR 3개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/2024-4Q-Super-Project-Team__The-Project-J.svg?v=64b8e38a" alt="바랜드 Lv.50" width="32%"></a>

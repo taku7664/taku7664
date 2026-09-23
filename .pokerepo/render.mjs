@@ -154,6 +154,13 @@ async function profile() {
 }
 const { name: trainerName, pinned } = await profile();
 
+const INTRO = ".pokerepo/intro.txt";
+const introRaw = (await readFile(INTRO, "utf8").catch(() => ""))
+  .split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
+const nameLine = introRaw.find((l) => /^name\s*:/i.test(l));
+const displayName = nameLine ? nameLine.replace(/^name\s*:/i, "").trim() : trainerName;
+const introLines = introRaw.filter((l) => l !== nameLine);
+
 const hasPrev = Object.keys(prev).length > 0;
 const entry = (repo) => {
   const cur = state.repos[repo], old = prev[repo];
@@ -238,7 +245,7 @@ const topSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${FW}" height="64
   <rect x="${M}" y="60" width="${FW - M * 2}" height="4" fill="#e5484d" opacity=".85"/>
   ${pokeball(34, 34, 13)}
   <text x="58" y="41" ${FONT} font-size="20" font-weight="900" fill="#f0f6fc" letter-spacing="3">PARTY</text>
-  <text x="166" y="40" ${FONT} font-size="13" font-weight="600" fill="#8b949e">트레이너 ${esc(login)}</text>
+  <text x="166" y="40" ${FONT} font-size="13" font-weight="600" fill="#8b949e">트레이너 ${esc(displayName)}</text>
   <text x="${FW - 26}" y="40" ${FONT} font-size="13" font-weight="700" fill="#c9d1d9" text-anchor="end">${party.length}/6  ·  도감 ${caught.length}  ·  총 커밋 ${totalCommits.toLocaleString("en-US")}</text>
 </svg>
 `;
@@ -251,44 +258,41 @@ await writeFile(`${CARDS_DIR}/_top.svg`, topSvg);
 await writeFile(`${CARDS_DIR}/_bottom.svg`, bottomSvg);
 const frameImg = (name, svg) => `<picture><img src="${RAW}/${CARDS_DIR}/${name}.svg?v=${bust(svg)}" alt="" width="97%"></picture>`;
 
-const INTRO = ".pokerepo/intro.txt";
-const introLines = (await readFile(INTRO, "utf8").catch(() => ""))
-  .split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
 
 function introSvg(lines, speaker) {
-  const TYPE = 0.045, LINE_PAUSE = 0.35, START = 0.5, LH = 32;
+  const TYPE = 0.045, LINE_PAUSE = 0.35, START = 0.5, LH = 32, FS = 17, X0 = 36;
   const boxY = 18, boxH = 34 + lines.length * LH;
   const h = boxY + boxH + M;
+  // Rough glyph width so the reveal ends where the text ends: CJK is ~1em, the rest ~0.55em.
+  const textWidth = (line) => [...line].reduce((w, ch) => w + (/[ᄀ-￿]/.test(ch) ? FS : FS * 0.55), 0);
   let t = START;
-  const text = lines.map((line, li) => {
-    const chars = [...line].map((ch) => {
-      const d = t.toFixed(3);
-      t += TYPE;
-      return `<tspan class="c" style="animation-delay:${d}s">${ch === " " ? "&#160;" : esc(ch)}</tspan>`;
-    }).join("");
-    t += LINE_PAUSE;
-    return `<text x="36" y="${boxY + 40 + li * LH}" class="line">${chars}</text>`;
-  }).join("\n  ");
+  const clips = [], text = [];
+  lines.forEach((line, li) => {
+    const n = [...line].length, dur = n * TYPE, y = boxY + 40 + li * LH;
+    clips.push(`<clipPath id="l${li}"><rect x="${X0 - 2}" y="${y - FS - 4}" height="${FS + 10}" width="0">
+      <animate attributeName="width" from="0" to="${Math.ceil(textWidth(line) + 8)}" begin="${t.toFixed(2)}s" dur="${dur.toFixed(2)}s" fill="freeze"/>
+    </rect></clipPath>`);
+    text.push(`<text x="${X0}" y="${y}" class="line" clip-path="url(#l${li})">${esc(line)}</text>`);
+    t += dur + LINE_PAUSE;
+  });
   const tabW = [...speaker].length * 11 + 34;
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${FW}" height="${h}" viewBox="0 0 ${FW} ${h}">
   <style>
     text { font-family: "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", Helvetica, Arial, sans-serif; white-space: pre; }
     .line { font-size: 17px; font-weight: 600; fill: #f0f6fc; }
     .name { font-size: 14px; font-weight: 800; fill: #fff; letter-spacing: 1px; }
-    .c { fill-opacity: 0; animation: type .01s steps(1) forwards; }
-    @keyframes type { to { fill-opacity: 1 } }
     .next { opacity: 0; animation: next 1s steps(1) ${t.toFixed(2)}s infinite; }
     @keyframes next { 0% { opacity: 1 } 50% { opacity: 0 } }
-    @media (prefers-reduced-motion: reduce) { .c { fill-opacity: 1; animation: none } .next { opacity: 1; animation: none } }
+    @media (prefers-reduced-motion: reduce) { .next { opacity: 1; animation: none } }
   </style>
-  <defs><linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b2436"/><stop offset="1" stop-color="#121826"/></linearGradient></defs>
+  <defs>${clips.join("")}<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b2436"/><stop offset="1" stop-color="#121826"/></linearGradient></defs>
   <rect x="${M}" y="${boxY}" width="${FW - M * 2}" height="${boxH}" rx="14" fill="url(#bg)" stroke="#c9d1d9" stroke-width="2.5"/>
   <rect x="${M + 6}" y="${boxY + 6}" width="${FW - M * 2 - 12}" height="${boxH - 12}" rx="9" fill="none" stroke="#e5484d" stroke-opacity=".55" stroke-width="1.5"/>
   <g transform="translate(26,4)">
     <rect width="${tabW}" height="28" rx="8" fill="#e5484d" stroke="#0d1117" stroke-width="2"/>
     <text x="${tabW / 2}" y="19" class="name" text-anchor="middle">${esc(speaker)}</text>
   </g>
-  ${text}
+  ${text.join("\n  ")}
   <path class="next" d="M${FW - 40},${boxY + boxH - 26} h14 l-7,9 z" fill="#e5484d"/>
 </svg>
 `;
@@ -296,7 +300,7 @@ function introSvg(lines, speaker) {
 
 let introHtml = "";
 if (introLines.length) {
-  const svg = introSvg(introLines, trainerName);
+  const svg = introSvg(introLines, displayName);
   await writeFile(`${CARDS_DIR}/_intro.svg`, svg);
   introHtml = `<picture><img src="${RAW}/${CARDS_DIR}/_intro.svg?v=${bust(svg)}" alt="${esc(introLines.join(" "))}" width="97%"></picture>\n\n`;
 }
