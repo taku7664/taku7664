@@ -1,3 +1,8 @@
+안녕하세요. 포켓몬을 좋아하는 평범한 인간입니다.  
+아래 포켓몬을 보셔도 당황하지 않으셔도 됩니다.  
+깃활동을 통해 포켓몬을 잡고 기르는 중인 단순한 모험중이니까요.  
+<a href="https://github.com/wantaekchoi/pokerepo">PokeRepo</a></sub></p>
+
 <div align="center">
 
 <picture><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/_top.svg?v=6917c8ed" alt="" width="97%"></picture>
