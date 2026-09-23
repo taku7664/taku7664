@@ -23,6 +23,12 @@ const TYPE_KO = {
 };
 
 const bust = (svg) => createHash("sha1").update(svg).digest("hex").slice(0, 8);
+// Content-hashed file names: a changed image gets a new URL, so no cache layer can serve a stale copy.
+async function emit(name, svg) {
+  const file = `${CARDS_DIR}/${name}.${bust(svg)}.svg`;
+  await writeFile(file, svg);
+  return `${RAW}/${file}`;
+}
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
 
 async function json(url) {
@@ -185,11 +191,9 @@ await mkdir(CARDS_DIR);
 async function render(list) {
   return Promise.all(list.map(async (e, i) => {
     const mon = { ...e, ...(await pokemon(e.mon)) };
-    const file = `${CARDS_DIR}/${e.repo.replace("/", "__")}.svg`;
-    const svg = cardSvg(mon, ((i % 3) * 0.35).toFixed(2));
-    await writeFile(file, svg);
+    const url = await emit(e.repo.replace("/", "__"), cardSvg(mon, ((i % 3) * 0.35).toFixed(2)));
     const tip = `${mon.name} · ${e.repo} · 커밋 ${e.commits}회 · 병합 PR ${e.merges}개`;
-    return `<a href="https://github.com/${e.repo}" title="${esc(tip)}"><img src="${RAW}/${file}?v=${bust(svg)}" alt="${esc(mon.name)} Lv.${e.level}" width="32%"></a>`;
+    return `<a href="https://github.com/${e.repo}" title="${esc(tip)}"><img src="${url}" alt="${esc(mon.name)} Lv.${e.level}" width="32%"></a>`;
   }));
 }
 
@@ -232,7 +236,7 @@ async function moreSvg(list) {
 `;
 }
 const more = rest.length ? await moreSvg(rest) : "";
-if (more) await writeFile(`${CARDS_DIR}/_more.svg`, more);
+const moreUrl = more ? await emit("_more", more) : "";
 
 const caught = Object.values(state.repos).filter((r) => r.caught);
 const totalCommits = caught.reduce((n, r) => n + (r.commits ?? 0), 0);
@@ -254,9 +258,9 @@ const bottomSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${FW}" height=
   <rect x="${M}" y="0" width="${FW - M * 2}" height="3" fill="#e5484d" opacity=".85"/>
 </svg>
 `;
-await writeFile(`${CARDS_DIR}/_top.svg`, topSvg);
-await writeFile(`${CARDS_DIR}/_bottom.svg`, bottomSvg);
-const frameImg = (name, svg) => `<picture><img src="${RAW}/${CARDS_DIR}/${name}.svg?v=${bust(svg)}" alt="" width="97%"></picture>`;
+const topUrl = await emit("_top", topSvg);
+const bottomUrl = await emit("_bottom", bottomSvg);
+const frameImg = (url) => `<picture><img src="${url}" alt="" width="97%"></picture>`;
 
 
 function introSvg(lines, speaker) {
@@ -301,22 +305,21 @@ function introSvg(lines, speaker) {
 let introHtml = "";
 if (introLines.length) {
   const svg = introSvg(introLines, displayName);
-  await writeFile(`${CARDS_DIR}/_intro.svg`, svg);
-  introHtml = `<picture><img src="${RAW}/${CARDS_DIR}/_intro.svg?v=${bust(svg)}" alt="${esc(introLines.join(" "))}" width="97%"></picture>\n\n`;
+  introHtml = `<picture><img src="${await emit("_intro", svg)}" alt="${esc(introLines.join(" "))}" width="97%"></picture>\n\n`;
 }
 
 const readme = `<div align="center">
 
-${introHtml}${frameImg("_top", topSvg)}
+${introHtml}${frameImg(topUrl)}
 
 ${partyHtml.join("\n")}
 
-${frameImg("_bottom", bottomSvg)}
+${frameImg(bottomUrl)}
 
 </div>
 ${restHtml.length ? `
 <details>
-<summary><picture><img src="${RAW}/${CARDS_DIR}/_more.svg?v=${bust(more)}" alt="나머지 포켓몬 ${restHtml.length}마리 더 보기" width="96%" align="middle"></picture></summary>
+<summary><picture><img src="${moreUrl}" alt="나머지 포켓몬 ${restHtml.length}마리 더 보기" width="96%" align="middle"></picture></summary>
 <br>
 <div align="center">
 
