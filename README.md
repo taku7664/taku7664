@@ -1,7 +1,7 @@
 <!-- POKEREPO-CARDS:START -->
 <div align="center">
 
-<picture><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/_intro.63b461f8.svg" alt="안녕하세요. 포켓몬을 좋아하는 평범한 개발자 트레이너(?)입니다. 깃 활동을 통해 포켓몬 챔피언이 되는게 목표입니다." width="97%"></picture>
+<picture><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/_intro.b93f4b33.svg" alt="안녕하세요. 포켓몬을 좋아하는 평범한 개발자 트레이너(?)입니다. 깃 활동을 통해 포켓몬 챔피언이 되는게 목표입니다." width="97%"></picture>
 
 <picture><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/_top.894c5313.svg" alt="" width="97%"></picture>
 

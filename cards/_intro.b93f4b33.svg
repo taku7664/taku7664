@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="852" height="122" viewBox="0 0 852 122">
+  <style>
+    text { font-family: "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", Helvetica, Arial, sans-serif; white-space: pre; }
+    .line { font-size: 17px; font-weight: 600; fill: #f0f6fc; }
+    .name { font-size: 14px; font-weight: 800; fill: #fff; letter-spacing: 1px; }
+    .next { opacity: 0; animation: next 1s steps(1) 4.08s infinite; }
+    @keyframes next { 0% { opacity: 1 } 50% { opacity: 0 } }
+    .cover { transform-box: fill-box; transform-origin: right center; animation-name: reveal; animation-fill-mode: both; }
+    @keyframes reveal { from { transform: scaleX(1) } to { transform: scaleX(0) } }
+    @media (prefers-reduced-motion: reduce) { .next { opacity: 1; animation: none } .cover { display: none } }
+  </style>
+  <defs><linearGradient id="bg" gradientUnits="userSpaceOnUse" x1="0" y1="18" x2="0" y2="116"><stop offset="0" stop-color="#1b2436"/><stop offset="1" stop-color="#121826"/></linearGradient></defs>
+  <rect x="6" y="18" width="840" height="98" rx="14" fill="url(#bg)" stroke="#c9d1d9" stroke-width="2.5"/>
+  <rect x="12" y="24" width="828" height="86" rx="9" fill="none" stroke="#e5484d" stroke-opacity=".55" stroke-width="1.5"/>
+  <g transform="translate(26,4)">
+    <rect width="67" height="28" rx="8" fill="#e5484d" stroke="#0d1117" stroke-width="2"/>
+    <text x="33.5" y="19" class="name" text-anchor="middle">박주형</text>
+  </g>
+  <text x="36" y="58" class="line">안녕하세요. 포켓몬을 좋아하는 평범한 개발자 트레이너(?)입니다.</text>
+  <text x="36" y="90" class="line">깃 활동을 통해 포켓몬 챔피언이 되는게 목표입니다.</text>
+  <rect class="cover" x="33" y="38" width="546" height="26" fill="url(#bg)" style="animation-duration:1.62s;animation-delay:0.50s;animation-timing-function:steps(36)"/>
+  <rect class="cover" x="33" y="70" width="433" height="26" fill="url(#bg)" style="animation-duration:1.26s;animation-delay:2.47s;animation-timing-function:steps(28)"/>
+  <path class="next" d="M812,90 h14 l-7,9 z" fill="#e5484d"/>
+</svg>

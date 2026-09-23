@@ -270,13 +270,12 @@ function introSvg(lines, speaker) {
   // Rough glyph width so the reveal ends where the text ends: CJK is ~1em, the rest ~0.55em.
   const textWidth = (line) => [...line].reduce((w, ch) => w + (/[ᄀ-￿]/.test(ch) ? FS : FS * 0.55), 0);
   let t = START;
-  const clips = [], text = [];
+  const text = [], covers = [];
   lines.forEach((line, li) => {
     const n = [...line].length, dur = n * TYPE, y = boxY + 40 + li * LH;
-    clips.push(`<clipPath id="l${li}"><rect x="${X0 - 2}" y="${y - FS - 4}" height="${FS + 10}" width="0">
-      <animate attributeName="width" from="0" to="${Math.ceil(textWidth(line) + 8)}" begin="${t.toFixed(2)}s" dur="${dur.toFixed(2)}s" fill="freeze"/>
-    </rect></clipPath>`);
-    text.push(`<text x="${X0}" y="${y}" class="line" clip-path="url(#l${li})">${esc(line)}</text>`);
+    text.push(`<text x="${X0}" y="${y}" class="line">${esc(line)}</text>`);
+    // A box-coloured cover that shrinks toward the right edge of the line, revealing it left to right.
+    covers.push(`<rect class="cover" x="${X0 - 3}" y="${y - FS - 3}" width="${Math.ceil(textWidth(line) + 10)}" height="${FS + 9}" fill="url(#bg)" style="animation-duration:${dur.toFixed(2)}s;animation-delay:${t.toFixed(2)}s;animation-timing-function:steps(${n})"/>`);
     t += dur + LINE_PAUSE;
   });
   const tabW = [...speaker].length * 11 + 34;
@@ -287,9 +286,11 @@ function introSvg(lines, speaker) {
     .name { font-size: 14px; font-weight: 800; fill: #fff; letter-spacing: 1px; }
     .next { opacity: 0; animation: next 1s steps(1) ${t.toFixed(2)}s infinite; }
     @keyframes next { 0% { opacity: 1 } 50% { opacity: 0 } }
-    @media (prefers-reduced-motion: reduce) { .next { opacity: 1; animation: none } }
+    .cover { transform-box: fill-box; transform-origin: right center; animation-name: reveal; animation-fill-mode: both; }
+    @keyframes reveal { from { transform: scaleX(1) } to { transform: scaleX(0) } }
+    @media (prefers-reduced-motion: reduce) { .next { opacity: 1; animation: none } .cover { display: none } }
   </style>
-  <defs>${clips.join("")}<linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b2436"/><stop offset="1" stop-color="#121826"/></linearGradient></defs>
+  <defs><linearGradient id="bg" gradientUnits="userSpaceOnUse" x1="0" y1="${boxY}" x2="0" y2="${boxY + boxH}"><stop offset="0" stop-color="#1b2436"/><stop offset="1" stop-color="#121826"/></linearGradient></defs>
   <rect x="${M}" y="${boxY}" width="${FW - M * 2}" height="${boxH}" rx="14" fill="url(#bg)" stroke="#c9d1d9" stroke-width="2.5"/>
   <rect x="${M + 6}" y="${boxY + 6}" width="${FW - M * 2 - 12}" height="${boxH - 12}" rx="9" fill="none" stroke="#e5484d" stroke-opacity=".55" stroke-width="1.5"/>
   <g transform="translate(26,4)">
@@ -297,6 +298,7 @@ function introSvg(lines, speaker) {
     <text x="${tabW / 2}" y="19" class="name" text-anchor="middle">${esc(speaker)}</text>
   </g>
   ${text.join("\n  ")}
+  ${covers.join("\n  ")}
   <path class="next" d="M${FW - 40},${boxY + boxH - 26} h14 l-7,9 z" fill="#e5484d"/>
 </svg>
 `;
