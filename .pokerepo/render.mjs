@@ -111,6 +111,7 @@ function cardSvg(mon, delay) {
 
 const state = JSON.parse(await readFile(STATE, "utf8"));
 const login = state.login;
+const RAW = `https://raw.githubusercontent.com/${process.env.GITHUB_REPOSITORY ?? `${login}/${login}`}/HEAD`;
 const entry = (repo) => ({ repo, ...state.repos[repo] });
 
 const partyRepos = parseParty(await readFile(CARD, "utf8"));
@@ -130,7 +131,7 @@ async function render(list) {
     const svg = cardSvg(mon, ((i % 3) * 0.35).toFixed(2));
     await writeFile(file, svg);
     const tip = `${mon.name} · ${e.repo} · 커밋 ${e.commits}회 · 병합 PR ${e.merges}개`;
-    return `<a href="https://github.com/${e.repo}" title="${esc(tip)}"><img src="${file}?v=${bust(svg)}" alt="${esc(mon.name)} Lv.${e.level}" width="32%"></a>`;
+    return `<a href="https://github.com/${e.repo}" title="${esc(tip)}"><img src="${RAW}/${file}?v=${bust(svg)}" alt="${esc(mon.name)} Lv.${e.level}" width="32%"></a>`;
   }));
 }
 
@@ -182,7 +183,7 @@ ${partyHtml.join("\n")}
 </div>
 ${restHtml.length ? `
 <details>
-<summary><picture><img src="${CARDS_DIR}/_more.svg?v=${bust(more)}" alt="나머지 포켓몬 ${restHtml.length}마리 더 보기" width="96%" align="middle"></picture></summary>
+<summary><picture><img src="${RAW}/${CARDS_DIR}/_more.svg?v=${bust(more)}" alt="나머지 포켓몬 ${restHtml.length}마리 더 보기" width="96%" align="middle"></picture></summary>
 <br>
 <div align="center">
 
