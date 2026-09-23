@@ -1,0 +1,252 @@
+{
+  "login": "taku7664",
+  "repos": {
+    "taku7664/AI-Tetris": {
+      "exp": 2250,
+      "caught": true,
+      "species": 915,
+      "stars": 0,
+      "commits": 9,
+      "merges": 0,
+      "alive": true,
+      "level": 13,
+      "mon": 915
+    },
+    "taku7664/AssetPrompter": {
+      "exp": 250,
+      "caught": true,
+      "species": 661,
+      "stars": 0,
+      "commits": 1,
+      "merges": 0,
+      "alive": true,
+      "level": 7,
+      "mon": 661
+    },
+    "taku7664/d-AI-so": {
+      "exp": 71000,
+      "caught": true,
+      "species": 261,
+      "stars": 0,
+      "commits": 284,
+      "merges": 0,
+      "alive": true,
+      "level": 41,
+      "mon": 262
+    },
+    "taku7664/DemoMaker": {
+      "exp": 0,
+      "caught": true,
+      "species": 290,
+      "stars": 0,
+      "commits": 0,
+      "merges": 0,
+      "alive": true,
+      "level": 1,
+      "mon": 290
+    },
+    "taku7664/GitAccounter": {
+      "exp": 0,
+      "caught": true,
+      "species": 32,
+      "stars": 0,
+      "commits": 0,
+      "merges": 0,
+      "alive": true,
+      "level": 1,
+      "mon": 32
+    },
+    "taku7664/JBroEngine": {
+      "exp": 104500,
+      "caught": true,
+      "species": 287,
+      "stars": 0,
+      "commits": 418,
+      "merges": 0,
+      "alive": true,
+      "level": 43,
+      "mon": 289
+    },
+    "taku7664/JBroEngine_old": {
+      "exp": 95250,
+      "caught": true,
+      "species": 438,
+      "stars": 0,
+      "commits": 381,
+      "merges": 0,
+      "alive": true,
+      "level": 45,
+      "mon": 185
+    },
+    "taku7664/Minecraft-Cobblemon-Mods": {
+      "exp": 120500,
+      "caught": true,
+      "species": 837,
+      "stars": 0,
+      "commits": 482,
+      "merges": 0,
+      "alive": true,
+      "level": 50,
+      "mon": 839
+    },
+    "taku7664/Othello-Game": {
+      "exp": 11000,
+      "caught": true,
+      "species": 322,
+      "stars": 0,
+      "commits": 44,
+      "merges": 0,
+      "alive": true,
+      "level": 22,
+      "mon": 322
+    },
+    "taku7664/taku7664": {
+      "exp": 2250,
+      "caught": true,
+      "species": 163,
+      "stars": 0,
+      "commits": 9,
+      "merges": 0,
+      "alive": true,
+      "level": 13,
+      "mon": 163
+    },
+    "taku7664/Tistory-Window-Theme-Skin": {
+      "exp": 3000,
+      "caught": true,
+      "species": 325,
+      "stars": 0,
+      "commits": 12,
+      "merges": 0,
+      "alive": true,
+      "level": 15,
+      "mon": 325
+    },
+    "Scarecrow37/VanishingGround": {
+      "exp": 792000,
+      "caught": true,
+      "species": 41,
+      "stars": 4,
+      "commits": 500,
+      "merges": 164,
+      "alive": true,
+      "level": 92,
+      "mon": 169
+    },
+    "2024-4Q-Super-Project-Team/The-Project-J": {
+      "exp": 124800,
+      "caught": true,
+      "species": 506,
+      "stars": 0,
+      "commits": 193,
+      "merges": 3,
+      "alive": true,
+      "level": 50,
+      "mon": 508
+    }
+  },
+  "dex": {
+    "32": {
+      "seen": true,
+      "caught": true
+    },
+    "41": {
+      "seen": true,
+      "caught": true
+    },
+    "42": {
+      "seen": true,
+      "caught": true
+    },
+    "163": {
+      "seen": true,
+      "caught": true
+    },
+    "169": {
+      "seen": true,
+      "caught": true
+    },
+    "185": {
+      "seen": true,
+      "caught": true
+    },
+    "261": {
+      "seen": true,
+      "caught": true
+    },
+    "262": {
+      "seen": true,
+      "caught": true
+    },
+    "287": {
+      "seen": true,
+      "caught": true
+    },
+    "288": {
+      "seen": true,
+      "caught": true
+    },
+    "289": {
+      "seen": true,
+      "caught": true
+    },
+    "290": {
+      "seen": true,
+      "caught": true
+    },
+    "322": {
+      "seen": true,
+      "caught": true
+    },
+    "325": {
+      "seen": true,
+      "caught": true
+    },
+    "438": {
+      "seen": true,
+      "caught": true
+    },
+    "506": {
+      "seen": true,
+      "caught": true
+    },
+    "507": {
+      "seen": true,
+      "caught": true
+    },
+    "508": {
+      "seen": true,
+      "caught": true
+    },
+    "661": {
+      "seen": true,
+      "caught": true
+    },
+    "837": {
+      "seen": true,
+      "caught": true
+    },
+    "838": {
+      "seen": true,
+      "caught": true
+    },
+    "839": {
+      "seen": true,
+      "caught": true
+    },
+    "915": {
+      "seen": true,
+      "caught": true
+    }
+  },
+  "trainer": {
+    "grassExp": 21050
+  },
+  "updatedAt": "2026-09-23",
+  "exp": {
+    "commitOwn": 250,
+    "commitExternal": 600,
+    "mergeOwn": 300,
+    "mergeExternal": 3000
+  }
+}
