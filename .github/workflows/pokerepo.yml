@@ -9,3 +9,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: wantaekchoi/pokerepo@v1
+        with:
+          party: 6
+          columns: 6
+          rotate: 2
+          sprite: home
+          sprite-size: 96
