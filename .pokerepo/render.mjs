@@ -1,3 +1,4 @@
+import { createHash } from "node:crypto";
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import sharp from "sharp";
 import { BG_CSS, typeBackground } from "./backgrounds.mjs";
@@ -20,6 +21,7 @@ const TYPE_KO = {
   rock: "바위", ghost: "고스트", dragon: "드래곤", dark: "악", steel: "강철", fairy: "페어리",
 };
 
+const bust = (svg) => createHash("sha1").update(svg).digest("hex").slice(0, 8);
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => `&#${c.charCodeAt(0)};`);
 
 async function json(url) {
@@ -125,9 +127,10 @@ async function render(list) {
   return Promise.all(list.map(async (e, i) => {
     const mon = { ...e, ...(await pokemon(e.mon)) };
     const file = `${CARDS_DIR}/${e.repo.replace("/", "__")}.svg`;
-    await writeFile(file, cardSvg(mon, ((i % 3) * 0.35).toFixed(2)));
+    const svg = cardSvg(mon, ((i % 3) * 0.35).toFixed(2));
+    await writeFile(file, svg);
     const tip = `${mon.name} · ${e.repo} · 커밋 ${e.commits}회 · 병합 PR ${e.merges}개`;
-    return `<a href="https://github.com/${e.repo}" title="${esc(tip)}"><img src="${file}" alt="${esc(mon.name)} Lv.${e.level}" width="32%"></a>`;
+    return `<a href="https://github.com/${e.repo}" title="${esc(tip)}"><img src="${file}?v=${bust(svg)}" alt="${esc(mon.name)} Lv.${e.level}" width="32%"></a>`;
   }));
 }
 
@@ -169,7 +172,8 @@ async function moreSvg(list) {
 </svg>
 `;
 }
-if (rest.length) await writeFile(`${CARDS_DIR}/_more.svg`, await moreSvg(rest));
+const more = rest.length ? await moreSvg(rest) : "";
+if (more) await writeFile(`${CARDS_DIR}/_more.svg`, more);
 
 const readme = `<div align="center">
 
@@ -178,7 +182,7 @@ ${partyHtml.join("\n")}
 </div>
 ${restHtml.length ? `
 <details>
-<summary><picture><img src="${CARDS_DIR}/_more.svg" alt="나머지 포켓몬 ${restHtml.length}마리 더 보기" width="96%" align="middle"></picture></summary>
+<summary><picture><img src="${CARDS_DIR}/_more.svg?v=${bust(more)}" alt="나머지 포켓몬 ${restHtml.length}마리 더 보기" width="96%" align="middle"></picture></summary>
 <br>
 <div align="center">
 
