@@ -6,6 +6,9 @@
     .lvnum { font-size: 17px; font-weight: 800; fill: #f0f6fc; }
     .chip { font-size: 11px; font-weight: 700; fill: #fff; text-anchor: middle; }
     .repo { font-size: 11px; fill: #58a6ff; text-decoration: underline; }
+    .no { font-size: 11px; font-weight: 700; fill: #8b949e; text-anchor: end; }
+    .pin { font-size: 10px; font-weight: 700; fill: #c9d1d9; }
+    .badge { font-size: 10.5px; font-weight: 800; fill: #0d1117; text-anchor: middle; }
     .float { animation: float 3s ease-in-out infinite; animation-delay: 0.35s; }
     @keyframes float { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-5px) } }
     @media (prefers-reduced-motion: reduce) { .float { animation: none } }
@@ -60,5 +63,8 @@
     <rect x="118" y="104" width="132" height="6" rx="3" fill="#ffffff" fill-opacity=".12"/>
     <rect x="118" y="104" width="9" height="6" rx="3" fill="#A8A77A"/>
     <text x="118" y="126" class="repo">AssetPrompter</text>
+    <text x="260" y="22" class="no">No.661</text>
+    
+    
   </g>
 </svg>

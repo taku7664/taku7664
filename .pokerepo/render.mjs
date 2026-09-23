@@ -1,3 +1,4 @@
+import { execSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import sharp from "sharp";
@@ -53,12 +54,19 @@ function pokemon(id) {
       .resize(160, 160, { fit: "contain", background: { r: 0, g: 0, b: 0, alpha: 0 } })
       .png({ compressionLevel: 9 })
       .toBuffer();
-    return { name, types: poke.types.map((t) => t.type.name), sprite: `data:image/png;base64,${png.toString("base64")}` };
+    return { name, dex: species.id, types: poke.types.map((t) => t.type.name), sprite: `data:image/png;base64,${png.toString("base64")}` };
   })());
   return speciesCache.get(id);
 }
 
 const W = 272, H = 136, M = 6;
+
+function badge(mon) {
+  const b = mon.isNew ? ["NEW!", "#f2cc60"] : mon.lvUp ? ["LV UP ▲", "#3fb950"] : null;
+  if (!b) return "";
+  const w = b[0].length * 7 + 14;
+  return `<g transform="translate(172,43)"><rect width="${w}" height="17" rx="8.5" fill="${b[1]}"/><text x="${w / 2}" y="12.5" class="badge">${b[0]}</text></g>`;
+}
 
 function cardSvg(mon, delay) {
   const c1 = TYPE_COLORS[mon.types[0]] ?? "#888";
@@ -79,6 +87,9 @@ function cardSvg(mon, delay) {
     .lvnum { font-size: 17px; font-weight: 800; fill: #f0f6fc; }
     .chip { font-size: 11px; font-weight: 700; fill: #fff; text-anchor: middle; }
     .repo { font-size: 11px; fill: #58a6ff; text-decoration: underline; }
+    .no { font-size: 11px; font-weight: 700; fill: #8b949e; text-anchor: end; }
+    .pin { font-size: 10px; font-weight: 700; fill: #c9d1d9; }
+    .badge { font-size: 10.5px; font-weight: 800; fill: #0d1117; text-anchor: middle; }
     .float { animation: float 3s ease-in-out infinite; animation-delay: ${delay}s; }
     @keyframes float { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-5px) } }
     @media (prefers-reduced-motion: reduce) { .float { animation: none } }${BG_CSS}
@@ -104,6 +115,13 @@ function cardSvg(mon, delay) {
     <rect x="118" y="104" width="132" height="6" rx="3" fill="#ffffff" fill-opacity=".12"/>
     <rect x="118" y="104" width="${bar}" height="6" rx="3" fill="${c1}"/>
     <text x="118" y="126" class="repo">${esc(repoShort)}</text>
+    <text x="${W - 12}" y="22" class="no">No.${String(mon.dex).padStart(3, "0")}</text>
+    ${mon.pinned ? `<g transform="translate(10,10)">
+      <rect width="58" height="18" rx="9" fill="#0d1117" fill-opacity=".75" stroke="#30363d"/>
+      <path d="M9,4.5 h6 l-1.2,3.6 l2.4,2.4 h-8.4 l2.4,-2.4 z M12,10.5 v4" fill="#c9d1d9" stroke="#c9d1d9" stroke-width="1" stroke-linejoin="round"/>
+      <text x="21" y="12.8" class="pin">Pinned</text>
+    </g>` : ""}
+    ${badge(mon)}
   </g>
 </svg>
 `;
@@ -112,7 +130,36 @@ function cardSvg(mon, delay) {
 const state = JSON.parse(await readFile(STATE, "utf8"));
 const login = state.login;
 const RAW = `https://raw.githubusercontent.com/${process.env.GITHUB_REPOSITORY ?? `${login}/${login}`}/HEAD`;
-const entry = (repo) => ({ repo, ...state.repos[repo] });
+let prev = {};
+try { prev = JSON.parse(execSync(`git show HEAD:${STATE}`, { stdio: ["ignore", "pipe", "ignore"] })).repos ?? {}; } catch {}
+
+async function pinnedRepos() {
+  const token = process.env.GITHUB_TOKEN;
+  if (!token) return new Set();
+  try {
+    const res = await fetch("https://api.github.com/graphql", {
+      method: "POST",
+      headers: { authorization: `bearer ${token}`, "content-type": "application/json" },
+      body: JSON.stringify({ query: `{ user(login: "${login}") { pinnedItems(first: 6, types: REPOSITORY) { nodes { ... on Repository { nameWithOwner parent { nameWithOwner } } } } } }` }),
+    });
+    const nodes = (await res.json()).data?.user?.pinnedItems?.nodes ?? [];
+    return new Set(nodes.flatMap((n) => [n.nameWithOwner, n.parent?.nameWithOwner].filter(Boolean)));
+  } catch {
+    return new Set();
+  }
+}
+const pinned = await pinnedRepos();
+
+const hasPrev = Object.keys(prev).length > 0;
+const entry = (repo) => {
+  const cur = state.repos[repo], old = prev[repo];
+  return {
+    repo, ...cur,
+    pinned: pinned.has(repo),
+    isNew: hasPrev && !old?.caught,
+    lvUp: !!old && cur.level > old.level,
+  };
+};
 
 const partyRepos = parseParty(await readFile(CARD, "utf8"));
 const party = partyRepos.map(entry);
@@ -176,7 +223,33 @@ async function moreSvg(list) {
 const more = rest.length ? await moreSvg(rest) : "";
 if (more) await writeFile(`${CARDS_DIR}/_more.svg`, more);
 
+const caught = Object.values(state.repos).filter((r) => r.caught);
+const totalCommits = caught.reduce((n, r) => n + (r.commits ?? 0), 0);
+const FW = 3 * (W + M * 2);
+const FONT = `font-family="Segoe UI, Apple SD Gothic Neo, Malgun Gothic, Noto Sans KR, Helvetica, Arial, sans-serif"`;
+const pokeball = (x, y, r) => `<g transform="translate(${x},${y})"><circle r="${r}" fill="#f0f6fc"/><path d="M${-r},0 A${r},${r} 0 0 1 ${r},0 Z" fill="#e5484d"/><rect x="${-r}" y="-1.5" width="${r * 2}" height="3" fill="#0d1117"/><circle r="${r * 0.36}" fill="#f0f6fc" stroke="#0d1117" stroke-width="3"/></g>`;
+const topSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${FW}" height="64" viewBox="0 0 ${FW} 64">
+  <defs><linearGradient id="t" x1="0" x2="1"><stop offset="0" stop-color="#1f2a44"/><stop offset="1" stop-color="#161b22"/></linearGradient></defs>
+  <path d="M${M},64 V24 Q${M},${M} 24,${M} H${FW - 24} Q${FW - M},${M} ${FW - M},24 V64" fill="url(#t)" stroke="#30363d"/>
+  <rect x="${M}" y="60" width="${FW - M * 2}" height="4" fill="#e5484d" opacity=".85"/>
+  ${pokeball(34, 34, 13)}
+  <text x="58" y="41" ${FONT} font-size="20" font-weight="900" fill="#f0f6fc" letter-spacing="3">PARTY</text>
+  <text x="166" y="40" ${FONT} font-size="13" font-weight="600" fill="#8b949e">트레이너 ${esc(login)}</text>
+  <text x="${FW - 26}" y="40" ${FONT} font-size="13" font-weight="700" fill="#c9d1d9" text-anchor="end">${party.length}/6  ·  도감 ${caught.length}  ·  총 커밋 ${totalCommits.toLocaleString("en-US")}</text>
+</svg>
+`;
+const bottomSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${FW}" height="30" viewBox="0 0 ${FW} 30">
+  <path d="M${M},0 V6 Q${M},24 24,24 H${FW - 24} Q${FW - M},24 ${FW - M},6 V0" fill="#161b22" stroke="#30363d"/>
+  <rect x="${M}" y="0" width="${FW - M * 2}" height="3" fill="#e5484d" opacity=".85"/>
+</svg>
+`;
+await writeFile(`${CARDS_DIR}/_top.svg`, topSvg);
+await writeFile(`${CARDS_DIR}/_bottom.svg`, bottomSvg);
+const frameImg = (name, svg) => `<picture><img src="${RAW}/${CARDS_DIR}/${name}.svg?v=${bust(svg)}" alt="" width="97%"></picture>`;
+
 const readme = `<div align="center">
+
+${frameImg("_top", topSvg)}
 
 ${partyHtml.join("\n")}
 
@@ -192,6 +265,12 @@ ${restHtml.join("\n")}
 </div>
 </details>
 ` : ""}
+<div align="center">
+
+${frameImg("_bottom", bottomSvg)}
+
+</div>
+
 <p align="right"><sub><a href="https://wantaekchoi.github.io/pokerepo/?u=${login}">${login}'s Dex</a> · powered by <a href="https://github.com/wantaekchoi/pokerepo">PokeRepo</a></sub></p>
 `;
 
