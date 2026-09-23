@@ -1,5 +1,6 @@
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import sharp from "sharp";
+import { BG_CSS, typeBackground } from "./backgrounds.mjs";
 
 const CARD = ".pokerepo/card.md";
 const STATE = "trainer.json";
@@ -78,9 +79,10 @@ function cardSvg(mon, delay) {
     .repo { font-size: 11px; fill: #58a6ff; text-decoration: underline; }
     .float { animation: float 3s ease-in-out infinite; animation-delay: ${delay}s; }
     @keyframes float { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-5px) } }
-    @media (prefers-reduced-motion: reduce) { .float { animation: none } }
+    @media (prefers-reduced-motion: reduce) { .float { animation: none } }${BG_CSS}
   </style>
   <defs>
+    <clipPath id="clip"><rect width="${W}" height="${H}" rx="18"/></clipPath>
     <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="${c1}" stop-opacity=".38"/>
       <stop offset="1" stop-color="${c2}" stop-opacity=".10"/>
@@ -89,7 +91,9 @@ function cardSvg(mon, delay) {
   </defs>
   <g transform="translate(${M},${M})">
     <rect width="${W}" height="${H}" rx="18" fill="#161b22"/>
-    <rect width="${W}" height="${H}" rx="18" fill="url(#g)" stroke="${c1}" stroke-opacity=".45"/>
+    <rect width="${W}" height="${H}" rx="18" fill="url(#g)"/>
+    <g clip-path="url(#clip)">${typeBackground(mon.types[0], c1, mon.repo)}</g>
+    <rect width="${W}" height="${H}" rx="18" fill="none" stroke="${c1}" stroke-opacity=".45"/>
     <circle cx="60" cy="68" r="56" fill="url(#r)"/>
     <g class="float"><image href="${mon.sprite}" x="4" y="12" width="112" height="112"/></g>
     <text x="118" y="34" class="name">${esc(mon.name)}</text>
