@@ -174,7 +174,7 @@ ${partyHtml.join("\n")}
 </div>
 ${restHtml.length ? `
 <details>
-<summary><img src="${CARDS_DIR}/_more.svg" alt="나머지 포켓몬 ${restHtml.length}마리 더 보기" width="96%"></summary>
+<summary><img src="${CARDS_DIR}/_more.svg" alt="나머지 포켓몬 ${restHtml.length}마리 더 보기" width="96%" align="middle"></summary>
 <br>
 <div align="center">
 
