@@ -183,7 +183,7 @@ ${restHtml.join("\n")}
 </div>
 </details>
 ` : ""}
-<p align="right"><sub><a href="https://wantaekchoi.github.io/pokerepo/?u=${login}">${login}'s Dex</a></sub></p>
+<p align="right"><sub><a href="https://wantaekchoi.github.io/pokerepo/?u=${login}">${login}'s Dex</a> · powered by <a href="https://github.com/wantaekchoi/pokerepo">PokeRepo</a></sub></p>
 `;
 
 await writeFile(README, readme);

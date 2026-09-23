@@ -25,4 +25,4 @@
 </div>
 </details>
 
-<p align="right"><sub><a href="https://wantaekchoi.github.io/pokerepo/?u=taku7664">taku7664's Dex</a></sub></p>
+<p align="right"><sub><a href="https://wantaekchoi.github.io/pokerepo/?u=taku7664">taku7664's Dex</a> · powered by <a href="https://github.com/wantaekchoi/pokerepo">PokeRepo</a></sub></p>
