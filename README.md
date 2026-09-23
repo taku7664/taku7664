@@ -17,8 +17,8 @@
 <a href="https://github.com/taku7664/JBroEngine" title="게을킹 · taku7664/JBroEngine · 커밋 418회 · 병합 PR 0개"><img src="cards/taku7664__JBroEngine.svg" alt="게을킹 Lv.43" width="32%"></a>
 <a href="https://github.com/taku7664/d-AI-so" title="그라에나 · taku7664/d-AI-so · 커밋 284회 · 병합 PR 0개"><img src="cards/taku7664__d-AI-so.svg" alt="그라에나 Lv.41" width="32%"></a>
 <a href="https://github.com/taku7664/Othello-Game" title="둔타 · taku7664/Othello-Game · 커밋 44회 · 병합 PR 0개"><img src="cards/taku7664__Othello-Game.svg" alt="둔타 Lv.22" width="32%"></a>
+<a href="https://github.com/taku7664/taku7664" title="부우부 · taku7664/taku7664 · 커밋 15회 · 병합 PR 0개"><img src="cards/taku7664__taku7664.svg" alt="부우부 Lv.15" width="32%"></a>
 <a href="https://github.com/taku7664/Tistory-Window-Theme-Skin" title="피그점프 · taku7664/Tistory-Window-Theme-Skin · 커밋 12회 · 병합 PR 0개"><img src="cards/taku7664__Tistory-Window-Theme-Skin.svg" alt="피그점프 Lv.15" width="32%"></a>
-<a href="https://github.com/taku7664/taku7664" title="부우부 · taku7664/taku7664 · 커밋 13회 · 병합 PR 0개"><img src="cards/taku7664__taku7664.svg" alt="부우부 Lv.14" width="32%"></a>
 <a href="https://github.com/taku7664/DemoMaker" title="토중몬 · taku7664/DemoMaker · 커밋 0회 · 병합 PR 0개"><img src="cards/taku7664__DemoMaker.svg" alt="토중몬 Lv.1" width="32%"></a>
 <a href="https://github.com/taku7664/GitAccounter" title="니드런♂ · taku7664/GitAccounter · 커밋 0회 · 병합 PR 0개"><img src="cards/taku7664__GitAccounter.svg" alt="니드런♂ Lv.1" width="32%"></a>
 

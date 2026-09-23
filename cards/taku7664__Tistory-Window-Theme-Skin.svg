@@ -6,7 +6,7 @@
     .lvnum { font-size: 17px; font-weight: 800; fill: #f0f6fc; }
     .chip { font-size: 11px; font-weight: 700; fill: #fff; text-anchor: middle; }
     .repo { font-size: 11px; fill: #58a6ff; text-decoration: underline; }
-    .float { animation: float 3s ease-in-out infinite; animation-delay: 0.00s; }
+    .float { animation: float 3s ease-in-out infinite; animation-delay: 0.35s; }
     @keyframes float { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-5px) } }
     @media (prefers-reduced-motion: reduce) { .float { animation: none } }
   </style>
