@@ -79,11 +79,11 @@
       "mon": 185
     },
     "taku7664/Minecraft-Cobblemon-Mods": {
-      "exp": 121000,
+      "exp": 121750,
       "caught": true,
       "species": 837,
       "stars": 0,
-      "commits": 484,
+      "commits": 487,
       "merges": 0,
       "alive": true,
       "level": 50,
@@ -101,14 +101,14 @@
       "mon": 322
     },
     "taku7664/taku7664": {
-      "exp": 4000,
+      "exp": 5750,
       "caught": true,
       "species": 163,
       "stars": 0,
-      "commits": 16,
+      "commits": 23,
       "merges": 0,
       "alive": true,
-      "level": 15,
+      "level": 17,
       "mon": 163
     },
     "taku7664/Tistory-Window-Theme-Skin": {
