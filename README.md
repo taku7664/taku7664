@@ -10,7 +10,7 @@
 </div>
 
 <details>
-<summary><b>나머지 포켓몬 7마리 더 보기</b></summary>
+<summary><img src="cards/_more.svg" alt="나머지 포켓몬 7마리 더 보기" width="96%"></summary>
 <br>
 <div align="center">
 

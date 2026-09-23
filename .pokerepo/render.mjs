@@ -130,6 +130,43 @@ async function render(list) {
 const partyHtml = await render(party);
 const restHtml = await render(rest);
 
+const MAX_FACES = 10;
+async function moreSvg(list) {
+  const BW = 3 * (W + M * 2) - M * 2, BH = 64;
+  const faces = await Promise.all(list.slice(0, MAX_FACES).map((e) => pokemon(e.mon)));
+  const extra = list.length - faces.length;
+  const step = 36, right = BW - 42 - (extra > 0 ? 44 : 0);
+  const x0 = right - (faces.length - 1) * step - 22;
+  const avatars = faces.map((p, i) => {
+    const cx = x0 + 22 + i * step;
+    return `<circle cx="${cx}" cy="32" r="22" fill="#21262d" stroke="#30363d"/><image href="${p.sprite}" x="${cx - 20}" y="12" width="40" height="40"/>`;
+  }).join("");
+  const plus = extra > 0
+    ? `<text x="${BW - 24}" y="38" class="plus" text-anchor="end">+${extra}</text>`
+    : "";
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${BW + M * 2}" height="${BH + M * 2}" viewBox="0 0 ${BW + M * 2} ${BH + M * 2}">
+  <style>
+    text { font-family: "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", Helvetica, Arial, sans-serif; }
+    .label { font-size: 17px; font-weight: 700; fill: #f0f6fc; }
+    .plus { font-size: 15px; font-weight: 700; fill: #8b949e; }
+  </style>
+  <g transform="translate(${M},${M})">
+    <rect width="${BW}" height="${BH}" rx="18" fill="#161b22" stroke="#30363d"/>
+    <g transform="translate(36,32)">
+      <circle r="14" fill="#f0f6fc"/>
+      <path d="M-14,0 A14,14 0 0 1 14,0 Z" fill="#e5484d"/>
+      <rect x="-14" y="-1.5" width="28" height="3" fill="#0d1117"/>
+      <circle r="5" fill="#f0f6fc" stroke="#0d1117" stroke-width="3"/>
+    </g>
+    <text x="62" y="39" class="label">나머지 포켓몬 ${list.length}마리 더 보기</text>
+    ${avatars}
+    ${plus}
+  </g>
+</svg>
+`;
+}
+if (rest.length) await writeFile(`${CARDS_DIR}/_more.svg`, await moreSvg(rest));
+
 const readme = `<div align="center">
 
 ${partyHtml.join("\n")}
@@ -137,7 +174,7 @@ ${partyHtml.join("\n")}
 </div>
 ${restHtml.length ? `
 <details>
-<summary><b>나머지 포켓몬 ${restHtml.length}마리 더 보기</b></summary>
+<summary><img src="${CARDS_DIR}/_more.svg" alt="나머지 포켓몬 ${restHtml.length}마리 더 보기" width="96%"></summary>
 <br>
 <div align="center">
 
