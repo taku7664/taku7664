@@ -133,22 +133,26 @@ const RAW = `https://raw.githubusercontent.com/${process.env.GITHUB_REPOSITORY ?
 let prev = {};
 try { prev = JSON.parse(execSync(`git show HEAD:${STATE}`, { stdio: ["ignore", "pipe", "ignore"] })).repos ?? {}; } catch {}
 
-async function pinnedRepos() {
+async function profile() {
   const token = process.env.GITHUB_TOKEN;
-  if (!token) return new Set();
+  if (!token) return { name: login, pinned: new Set() };
   try {
     const res = await fetch("https://api.github.com/graphql", {
       method: "POST",
       headers: { authorization: `bearer ${token}`, "content-type": "application/json" },
-      body: JSON.stringify({ query: `{ user(login: "${login}") { pinnedItems(first: 6, types: REPOSITORY) { nodes { ... on Repository { nameWithOwner parent { nameWithOwner } } } } } }` }),
+      body: JSON.stringify({ query: `{ user(login: "${login}") { name pinnedItems(first: 6, types: REPOSITORY) { nodes { ... on Repository { nameWithOwner parent { nameWithOwner } } } } } }` }),
     });
-    const nodes = (await res.json()).data?.user?.pinnedItems?.nodes ?? [];
-    return new Set(nodes.flatMap((n) => [n.nameWithOwner, n.parent?.nameWithOwner].filter(Boolean)));
+    const user = (await res.json()).data?.user;
+    const nodes = user?.pinnedItems?.nodes ?? [];
+    return {
+      name: user?.name || login,
+      pinned: new Set(nodes.flatMap((n) => [n.nameWithOwner, n.parent?.nameWithOwner].filter(Boolean))),
+    };
   } catch {
-    return new Set();
+    return { name: login, pinned: new Set() };
   }
 }
-const pinned = await pinnedRepos();
+const { name: trainerName, pinned } = await profile();
 
 const hasPrev = Object.keys(prev).length > 0;
 const entry = (repo) => {
@@ -247,9 +251,59 @@ await writeFile(`${CARDS_DIR}/_top.svg`, topSvg);
 await writeFile(`${CARDS_DIR}/_bottom.svg`, bottomSvg);
 const frameImg = (name, svg) => `<picture><img src="${RAW}/${CARDS_DIR}/${name}.svg?v=${bust(svg)}" alt="" width="97%"></picture>`;
 
+const INTRO = ".pokerepo/intro.txt";
+const introLines = (await readFile(INTRO, "utf8").catch(() => ""))
+  .split(/\r?\n/).map((l) => l.trim()).filter(Boolean);
+
+function introSvg(lines, speaker) {
+  const TYPE = 0.045, LINE_PAUSE = 0.35, START = 0.5, LH = 32;
+  const boxY = 18, boxH = 34 + lines.length * LH;
+  const h = boxY + boxH + M;
+  let t = START;
+  const text = lines.map((line, li) => {
+    const chars = [...line].map((ch) => {
+      const d = t.toFixed(3);
+      t += TYPE;
+      return `<tspan class="c" style="animation-delay:${d}s">${ch === " " ? "&#160;" : esc(ch)}</tspan>`;
+    }).join("");
+    t += LINE_PAUSE;
+    return `<text x="36" y="${boxY + 40 + li * LH}" class="line">${chars}</text>`;
+  }).join("\n  ");
+  const tabW = [...speaker].length * 11 + 34;
+  return `<svg xmlns="http://www.w3.org/2000/svg" width="${FW}" height="${h}" viewBox="0 0 ${FW} ${h}">
+  <style>
+    text { font-family: "Segoe UI", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", Helvetica, Arial, sans-serif; white-space: pre; }
+    .line { font-size: 17px; font-weight: 600; fill: #f0f6fc; }
+    .name { font-size: 14px; font-weight: 800; fill: #fff; letter-spacing: 1px; }
+    .c { fill-opacity: 0; animation: type .01s steps(1) forwards; }
+    @keyframes type { to { fill-opacity: 1 } }
+    .next { opacity: 0; animation: next 1s steps(1) ${t.toFixed(2)}s infinite; }
+    @keyframes next { 0% { opacity: 1 } 50% { opacity: 0 } }
+    @media (prefers-reduced-motion: reduce) { .c { fill-opacity: 1; animation: none } .next { opacity: 1; animation: none } }
+  </style>
+  <defs><linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b2436"/><stop offset="1" stop-color="#121826"/></linearGradient></defs>
+  <rect x="${M}" y="${boxY}" width="${FW - M * 2}" height="${boxH}" rx="14" fill="url(#bg)" stroke="#c9d1d9" stroke-width="2.5"/>
+  <rect x="${M + 6}" y="${boxY + 6}" width="${FW - M * 2 - 12}" height="${boxH - 12}" rx="9" fill="none" stroke="#e5484d" stroke-opacity=".55" stroke-width="1.5"/>
+  <g transform="translate(26,4)">
+    <rect width="${tabW}" height="28" rx="8" fill="#e5484d" stroke="#0d1117" stroke-width="2"/>
+    <text x="${tabW / 2}" y="19" class="name" text-anchor="middle">${esc(speaker)}</text>
+  </g>
+  ${text}
+  <path class="next" d="M${FW - 40},${boxY + boxH - 26} h14 l-7,9 z" fill="#e5484d"/>
+</svg>
+`;
+}
+
+let introHtml = "";
+if (introLines.length) {
+  const svg = introSvg(introLines, trainerName);
+  await writeFile(`${CARDS_DIR}/_intro.svg`, svg);
+  introHtml = `<picture><img src="${RAW}/${CARDS_DIR}/_intro.svg?v=${bust(svg)}" alt="${esc(introLines.join(" "))}" width="97%"></picture>\n\n`;
+}
+
 const readme = `<div align="center">
 
-${frameImg("_top", topSvg)}
+${introHtml}${frameImg("_top", topSvg)}
 
 ${partyHtml.join("\n")}
 
@@ -270,5 +324,11 @@ ${restHtml.join("\n")}
 <p align="right"><sub><a href="https://wantaekchoi.github.io/pokerepo/?u=${login}">${login}'s Dex</a> · powered by <a href="https://github.com/wantaekchoi/pokerepo">PokeRepo</a></sub></p>
 `;
 
-await writeFile(README, readme);
+const START_MARK = "<!-- POKEREPO-CARDS:START -->", END_MARK = "<!-- POKEREPO-CARDS:END -->";
+const current = await readFile(README, "utf8").catch(() => "");
+const block = `${START_MARK}\n${readme}${END_MARK}`;
+const s = current.indexOf(START_MARK), e = current.indexOf(END_MARK);
+await writeFile(README, s >= 0 && e > s
+  ? current.slice(0, s) + block + current.slice(e + END_MARK.length)
+  : `${block}\n`);
 console.log(`party ${party.length}, rest ${rest.length}`);

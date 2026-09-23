@@ -1,7 +1,7 @@
-안녕하세요. 포켓몬을 좋아하는 평범한 개발자 트레이너(?)입니다.
-깃 활동을 통해 포켓몬 챔피언이 되는게 목표입니다.
-
+<!-- POKEREPO-CARDS:START -->
 <div align="center">
+
+<picture><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/_intro.svg?v=970e7a08" alt="안녕하세요. 포켓몬을 좋아하는 평범한 개발자 트레이너(?)입니다. 깃 활동을 통해 포켓몬 챔피언이 되는게 목표입니다." width="97%"></picture>
 
 <picture><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/_top.svg?v=6917c8ed" alt="" width="97%"></picture>
 
@@ -33,3 +33,4 @@
 </details>
 
 <p align="right"><sub><a href="https://wantaekchoi.github.io/pokerepo/?u=taku7664">taku7664's Dex</a> · powered by <a href="https://github.com/wantaekchoi/pokerepo">PokeRepo</a></sub></p>
+<!-- POKEREPO-CARDS:END -->
