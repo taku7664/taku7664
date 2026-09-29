@@ -143,6 +143,17 @@
       "alive": true,
       "level": 50,
       "mon": 508
+    },
+    "tt-a1i/archify": {
+      "exp": 0,
+      "caught": false,
+      "species": 140,
+      "stars": 73545,
+      "commits": 0,
+      "merges": 0,
+      "alive": true,
+      "level": 1,
+      "mon": 140
     }
   },
   "dex": {
@@ -157,6 +168,10 @@
     "42": {
       "seen": true,
       "caught": true
+    },
+    "140": {
+      "seen": true,
+      "caught": false
     },
     "163": {
       "seen": true,
@@ -240,9 +255,9 @@
     }
   },
   "trainer": {
-    "grassExp": 18750
+    "grassExp": 18950
   },
-  "updatedAt": "2026-09-27",
+  "updatedAt": "2026-09-29",
   "exp": {
     "commitOwn": 250,
     "commitExternal": 600,
