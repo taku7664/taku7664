@@ -154,6 +154,17 @@
       "alive": true,
       "level": 1,
       "mon": 140
+    },
+    "taku7664/better-kor": {
+      "exp": 3500,
+      "caught": true,
+      "species": 509,
+      "stars": 0,
+      "commits": 14,
+      "merges": 0,
+      "alive": true,
+      "level": 15,
+      "mon": 509
     }
   },
   "dex": {
@@ -233,6 +244,10 @@
       "seen": true,
       "caught": true
     },
+    "509": {
+      "seen": true,
+      "caught": true
+    },
     "661": {
       "seen": true,
       "caught": true
@@ -255,9 +270,9 @@
     }
   },
   "trainer": {
-    "grassExp": 19650
+    "grassExp": 19800
   },
-  "updatedAt": "2026-10-01",
+  "updatedAt": "2026-10-02",
   "exp": {
     "commitOwn": 250,
     "commitExternal": 600,
