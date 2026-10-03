@@ -3,7 +3,7 @@
 
 <picture><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/_intro.b93f4b33.svg" alt="안녕하세요. 포켓몬을 좋아하는 평범한 개발자 트레이너(?)입니다. 깃 활동을 통해 포켓몬 챔피언이 되는게 목표입니다." width="97%"></picture>
 
-<picture><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/_top.a34813a7.svg" alt="" width="97%"></picture>
+<picture><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/_top.1f0f39bd.svg" alt="" width="97%"></picture>
 
 <a href="https://github.com/Scarecrow37/VanishingGround" title="크로뱃 · Scarecrow37/VanishingGround · 커밋 500회 · 병합 PR 164개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/Scarecrow37__VanishingGround.aece023b.svg" alt="크로뱃 Lv.92" width="32%"></a>
 <a href="https://github.com/taku7664/Minecraft-Cobblemon-Mods" title="석탄산 · taku7664/Minecraft-Cobblemon-Mods · 커밋 500회 · 병합 PR 0개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/taku7664__Minecraft-Cobblemon-Mods.b1385794.svg" alt="석탄산 Lv.50" width="32%"></a>
@@ -22,7 +22,7 @@
 <div align="center">
 
 <a href="https://github.com/taku7664/JBroEngine_old" title="꼬지모 · taku7664/JBroEngine_old · 커밋 381회 · 병합 PR 0개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/taku7664__JBroEngine_old.d9a1410e.svg" alt="꼬지모 Lv.45" width="32%"></a>
-<a href="https://github.com/taku7664/d-AI-so" title="그라에나 · taku7664/d-AI-so · 커밋 284회 · 병합 PR 0개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/taku7664__d-AI-so.d624800c.svg" alt="그라에나 Lv.41" width="32%"></a>
+<a href="https://github.com/taku7664/d-AI-so" title="그라에나 · taku7664/d-AI-so · 커밋 291회 · 병합 PR 0개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/taku7664__d-AI-so.d624800c.svg" alt="그라에나 Lv.41" width="32%"></a>
 <a href="https://github.com/taku7664/Othello-Game" title="둔타 · taku7664/Othello-Game · 커밋 44회 · 병합 PR 0개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/taku7664__Othello-Game.03b80fc6.svg" alt="둔타 Lv.22" width="32%"></a>
 <a href="https://github.com/taku7664/taku7664" title="부우부 · taku7664/taku7664 · 커밋 30회 · 병합 PR 0개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/taku7664__taku7664.22a27fff.svg" alt="부우부 Lv.19" width="32%"></a>
 <a href="https://github.com/taku7664/better-kor" title="쌔비냥 · taku7664/better-kor · 커밋 14회 · 병합 PR 0개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/taku7664__better-kor.6360169d.svg" alt="쌔비냥 Lv.15" width="32%"></a>

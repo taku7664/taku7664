@@ -24,11 +24,11 @@
       "mon": 661
     },
     "taku7664/d-AI-so": {
-      "exp": 71000,
+      "exp": 72750,
       "caught": true,
       "species": 261,
       "stars": 0,
-      "commits": 284,
+      "commits": 291,
       "merges": 0,
       "alive": true,
       "level": 41,
@@ -270,7 +270,7 @@
     }
   },
   "trainer": {
-    "grassExp": 19800
+    "grassExp": 20300
   },
   "updatedAt": "2026-10-03",
   "exp": {
