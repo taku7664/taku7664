@@ -24,14 +24,14 @@
       "mon": 661
     },
     "taku7664/d-AI-so": {
-      "exp": 74750,
+      "exp": 81000,
       "caught": true,
       "species": 261,
       "stars": 0,
-      "commits": 299,
+      "commits": 324,
       "merges": 0,
       "alive": true,
-      "level": 42,
+      "level": 43,
       "mon": 262
     },
     "taku7664/DemoMaker": {
@@ -270,9 +270,9 @@
     }
   },
   "trainer": {
-    "grassExp": 20250
+    "grassExp": 22250
   },
-  "updatedAt": "2026-10-06",
+  "updatedAt": "2026-10-07",
   "exp": {
     "commitOwn": 250,
     "commitExternal": 600,
