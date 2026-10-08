@@ -24,11 +24,11 @@
       "mon": 661
     },
     "taku7664/d-AI-so": {
-      "exp": 81000,
+      "exp": 82500,
       "caught": true,
       "species": 261,
       "stars": 0,
-      "commits": 324,
+      "commits": 330,
       "merges": 0,
       "alive": true,
       "level": 43,
@@ -165,6 +165,39 @@
       "alive": true,
       "level": 15,
       "mon": 509
+    },
+    "taku7664/BetterEmote": {
+      "exp": 250,
+      "caught": true,
+      "species": 504,
+      "stars": 0,
+      "commits": 1,
+      "merges": 0,
+      "alive": true,
+      "level": 6,
+      "mon": 504
+    },
+    "taku7664/RoundingBlock": {
+      "exp": 250,
+      "caught": true,
+      "species": 917,
+      "stars": 0,
+      "commits": 1,
+      "merges": 0,
+      "alive": true,
+      "level": 5,
+      "mon": 917
+    },
+    "taku7664/SimpleMyRoom": {
+      "exp": 250,
+      "caught": true,
+      "species": 519,
+      "stars": 0,
+      "commits": 1,
+      "merges": 0,
+      "alive": true,
+      "level": 7,
+      "mon": 519
     }
   },
   "dex": {
@@ -232,6 +265,10 @@
       "seen": true,
       "caught": true
     },
+    "504": {
+      "seen": true,
+      "caught": true
+    },
     "506": {
       "seen": true,
       "caught": true
@@ -245,6 +282,10 @@
       "caught": true
     },
     "509": {
+      "seen": true,
+      "caught": true
+    },
+    "519": {
       "seen": true,
       "caught": true
     },
@@ -267,12 +308,16 @@
     "915": {
       "seen": true,
       "caught": true
+    },
+    "917": {
+      "seen": true,
+      "caught": true
     }
   },
   "trainer": {
-    "grassExp": 22250
+    "grassExp": 22350
   },
-  "updatedAt": "2026-10-07",
+  "updatedAt": "2026-10-08",
   "exp": {
     "commitOwn": 250,
     "commitExternal": 600,
