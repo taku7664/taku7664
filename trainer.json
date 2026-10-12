@@ -189,15 +189,26 @@
       "mon": 917
     },
     "taku7664/SimpleMyRoom": {
-      "exp": 250,
+      "exp": 500,
       "caught": true,
       "species": 519,
+      "stars": 0,
+      "commits": 2,
+      "merges": 0,
+      "alive": true,
+      "level": 9,
+      "mon": 519
+    },
+    "taku7664/ppakemon-vps-backup-auth": {
+      "exp": 250,
+      "caught": true,
+      "species": 436,
       "stars": 0,
       "commits": 1,
       "merges": 0,
       "alive": true,
-      "level": 7,
-      "mon": 519
+      "level": 6,
+      "mon": 436
     }
   },
   "dex": {
@@ -261,6 +272,10 @@
       "seen": true,
       "caught": true
     },
+    "436": {
+      "seen": true,
+      "caught": true
+    },
     "438": {
       "seen": true,
       "caught": true
@@ -315,9 +330,9 @@
     }
   },
   "trainer": {
-    "grassExp": 30500
+    "grassExp": 31350
   },
-  "updatedAt": "2026-10-10",
+  "updatedAt": "2026-10-12",
   "exp": {
     "commitOwn": 250,
     "commitExternal": 600,
