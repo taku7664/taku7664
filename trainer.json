@@ -189,14 +189,14 @@
       "mon": 917
     },
     "taku7664/SimpleMyRoom": {
-      "exp": 500,
+      "exp": 750,
       "caught": true,
       "species": 519,
       "stars": 0,
-      "commits": 2,
+      "commits": 3,
       "merges": 0,
       "alive": true,
-      "level": 9,
+      "level": 11,
       "mon": 519
     },
     "taku7664/ppakemon-vps-backup-auth": {
@@ -330,9 +330,9 @@
     }
   },
   "trainer": {
-    "grassExp": 29400
+    "grassExp": 29600
   },
-  "updatedAt": "2026-10-13",
+  "updatedAt": "2026-10-14",
   "exp": {
     "commitOwn": 250,
     "commitExternal": 600,
