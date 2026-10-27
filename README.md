@@ -3,21 +3,21 @@
 
 <picture><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/_intro.b93f4b33.svg" alt="안녕하세요. 포켓몬을 좋아하는 평범한 개발자 트레이너(?)입니다. 깃 활동을 통해 포켓몬 챔피언이 되는게 목표입니다." width="97%"></picture>
 
-<picture><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/_top.dabfe1e7.svg" alt="" width="97%"></picture>
+<picture><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/_top.8a9b5c42.svg" alt="" width="97%"></picture>
 
 <a href="https://github.com/Scarecrow37/VanishingGround" title="크로뱃 · Scarecrow37/VanishingGround · 커밋 500회 · 병합 PR 164개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/Scarecrow37__VanishingGround.aece023b.svg" alt="크로뱃 Lv.92" width="32%"></a>
 <a href="https://github.com/taku7664/Minecraft-Cobblemon-Mods" title="석탄산 · taku7664/Minecraft-Cobblemon-Mods · 커밋 500회 · 병합 PR 0개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/taku7664__Minecraft-Cobblemon-Mods.b1385794.svg" alt="석탄산 Lv.50" width="32%"></a>
 <a href="https://github.com/2024-4Q-Super-Project-Team/The-Project-J" title="바랜드 · 2024-4Q-Super-Project-Team/The-Project-J · 커밋 193회 · 병합 PR 3개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/2024-4Q-Super-Project-Team__The-Project-J.49b1725e.svg" alt="바랜드 Lv.50" width="32%"></a>
 <a href="https://github.com/taku7664/JBroEngine" title="게을킹 · taku7664/JBroEngine · 커밋 500회 · 병합 PR 0개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/taku7664__JBroEngine.45204969.svg" alt="게을킹 Lv.46" width="32%"></a>
-<a href="https://github.com/taku7664/SimpleMyRoom" title="콩둘기 · taku7664/SimpleMyRoom · 커밋 3회 · 병합 PR 0개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/taku7664__SimpleMyRoom.9b0e07e3.svg" alt="콩둘기 Lv.11" width="32%"></a>
-<a href="https://github.com/taku7664/better-kor" title="쌔비냥 · taku7664/better-kor · 커밋 14회 · 병합 PR 0개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/taku7664__better-kor.b29833a0.svg" alt="쌔비냥 Lv.15" width="32%"></a>
+<a href="https://github.com/taku7664/better-kor" title="쌔비냥 · taku7664/better-kor · 커밋 14회 · 병합 PR 0개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/taku7664__better-kor.6360169d.svg" alt="쌔비냥 Lv.15" width="32%"></a>
+<a href="https://github.com/taku7664/BetterEmote" title="보르쥐 · taku7664/BetterEmote · 커밋 1회 · 병합 PR 0개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/taku7664__BetterEmote.bf529944.svg" alt="보르쥐 Lv.6" width="32%"></a>
 
 <picture><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/_bottom.ca5025d6.svg" alt="" width="97%"></picture>
 
 </div>
 
 <details>
-<summary><picture><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/_more.a057f711.svg" alt="나머지 포켓몬 12마리 더 보기" width="96%" align="middle"></picture></summary>
+<summary><picture><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/_more.293835ed.svg" alt="나머지 포켓몬 12마리 더 보기" width="96%" align="middle"></picture></summary>
 <br>
 <div align="center">
 
@@ -26,9 +26,9 @@
 <a href="https://github.com/taku7664/Othello-Game" title="둔타 · taku7664/Othello-Game · 커밋 44회 · 병합 PR 0개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/taku7664__Othello-Game.03b80fc6.svg" alt="둔타 Lv.22" width="32%"></a>
 <a href="https://github.com/taku7664/taku7664" title="부우부 · taku7664/taku7664 · 커밋 30회 · 병합 PR 0개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/taku7664__taku7664.22a27fff.svg" alt="부우부 Lv.19" width="32%"></a>
 <a href="https://github.com/taku7664/Tistory-Window-Theme-Skin" title="피그점프 · taku7664/Tistory-Window-Theme-Skin · 커밋 12회 · 병합 PR 0개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/taku7664__Tistory-Window-Theme-Skin.c28fa3f9.svg" alt="피그점프 Lv.15" width="32%"></a>
-<a href="https://github.com/taku7664/AI-Tetris" title="맛보돈 · taku7664/AI-Tetris · 커밋 9회 · 병합 PR 0개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/taku7664__AI-Tetris.37bce5f3.svg" alt="맛보돈 Lv.13" width="32%"></a>
-<a href="https://github.com/taku7664/AssetPrompter" title="화살꼬빈 · taku7664/AssetPrompter · 커밋 1회 · 병합 PR 0개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/taku7664__AssetPrompter.820d0751.svg" alt="화살꼬빈 Lv.7" width="32%"></a>
-<a href="https://github.com/taku7664/BetterEmote" title="보르쥐 · taku7664/BetterEmote · 커밋 1회 · 병합 PR 0개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/taku7664__BetterEmote.cf4dd11d.svg" alt="보르쥐 Lv.6" width="32%"></a>
+<a href="https://github.com/taku7664/SimpleMyRoom" title="콩둘기 · taku7664/SimpleMyRoom · 커밋 7회 · 병합 PR 0개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/taku7664__SimpleMyRoom.503071d5.svg" alt="콩둘기 Lv.14" width="32%"></a>
+<a href="https://github.com/taku7664/AI-Tetris" title="맛보돈 · taku7664/AI-Tetris · 커밋 9회 · 병합 PR 0개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/taku7664__AI-Tetris.91d3be8c.svg" alt="맛보돈 Lv.13" width="32%"></a>
+<a href="https://github.com/taku7664/AssetPrompter" title="화살꼬빈 · taku7664/AssetPrompter · 커밋 1회 · 병합 PR 0개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/taku7664__AssetPrompter.7967ffea.svg" alt="화살꼬빈 Lv.7" width="32%"></a>
 <a href="https://github.com/taku7664/ppakemon-vps-backup-auth" title="동미러 · taku7664/ppakemon-vps-backup-auth · 커밋 1회 · 병합 PR 0개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/taku7664__ppakemon-vps-backup-auth.3613ab2d.svg" alt="동미러 Lv.6" width="32%"></a>
 <a href="https://github.com/taku7664/RoundingBlock" title="타랜툴라 · taku7664/RoundingBlock · 커밋 1회 · 병합 PR 0개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/taku7664__RoundingBlock.78487703.svg" alt="타랜툴라 Lv.5" width="32%"></a>
 <a href="https://github.com/taku7664/DemoMaker" title="토중몬 · taku7664/DemoMaker · 커밋 0회 · 병합 PR 0개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/taku7664__DemoMaker.a8174cfa.svg" alt="토중몬 Lv.1" width="32%"></a>
