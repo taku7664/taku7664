@@ -330,9 +330,9 @@
     }
   },
   "trainer": {
-    "grassExp": 32400
+    "grassExp": 32600
   },
-  "updatedAt": "2026-10-27",
+  "updatedAt": "2026-10-28",
   "exp": {
     "commitOwn": 250,
     "commitExternal": 600,
