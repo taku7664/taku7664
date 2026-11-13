@@ -209,6 +209,17 @@
       "alive": true,
       "level": 6,
       "mon": 436
+    },
+    "taku7664/jbro-webd": {
+      "exp": 7750,
+      "caught": true,
+      "species": 582,
+      "stars": 0,
+      "commits": 31,
+      "merges": 0,
+      "alive": true,
+      "level": 18,
+      "mon": 582
     }
   },
   "dex": {
@@ -304,6 +315,10 @@
       "seen": true,
       "caught": true
     },
+    "582": {
+      "seen": true,
+      "caught": true
+    },
     "661": {
       "seen": true,
       "caught": true
@@ -330,9 +345,9 @@
     }
   },
   "trainer": {
-    "grassExp": 32600
+    "grassExp": 32800
   },
-  "updatedAt": "2026-11-12",
+  "updatedAt": "2026-11-13",
   "exp": {
     "commitOwn": 250,
     "commitExternal": 600,
