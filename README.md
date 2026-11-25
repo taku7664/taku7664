@@ -9,15 +9,15 @@
 <a href="https://github.com/taku7664/Minecraft-Cobblemon-Mods" title="석탄산 · taku7664/Minecraft-Cobblemon-Mods · 커밋 500회 · 병합 PR 0개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/taku7664__Minecraft-Cobblemon-Mods.b1385794.svg" alt="석탄산 Lv.50" width="32%"></a>
 <a href="https://github.com/2024-4Q-Super-Project-Team/The-Project-J" title="바랜드 · 2024-4Q-Super-Project-Team/The-Project-J · 커밋 193회 · 병합 PR 3개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/2024-4Q-Super-Project-Team__The-Project-J.49b1725e.svg" alt="바랜드 Lv.50" width="32%"></a>
 <a href="https://github.com/taku7664/JBroEngine" title="게을킹 · taku7664/JBroEngine · 커밋 500회 · 병합 PR 0개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/taku7664__JBroEngine.45204969.svg" alt="게을킹 Lv.46" width="32%"></a>
-<a href="https://github.com/taku7664/GitAccounter" title="니드런♂ · taku7664/GitAccounter · 커밋 0회 · 병합 PR 0개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/taku7664__GitAccounter.84bd1be0.svg" alt="니드런♂ Lv.1" width="32%"></a>
-<a href="https://github.com/taku7664/better-kor" title="쌔비냥 · taku7664/better-kor · 커밋 14회 · 병합 PR 0개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/taku7664__better-kor.b29833a0.svg" alt="쌔비냥 Lv.15" width="32%"></a>
+<a href="https://github.com/taku7664/better-kor" title="쌔비냥 · taku7664/better-kor · 커밋 14회 · 병합 PR 0개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/taku7664__better-kor.6360169d.svg" alt="쌔비냥 Lv.15" width="32%"></a>
+<a href="https://github.com/tt-a1i/archify" title="투구 · tt-a1i/archify · 커밋 0회 · 병합 PR 0개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/tt-a1i__archify.3d9d7c2e.svg" alt="투구 Lv.1" width="32%"></a>
 
 <picture><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/_bottom.ca5025d6.svg" alt="" width="97%"></picture>
 
 </div>
 
 <details>
-<summary><picture><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/_more.c760fad2.svg" alt="나머지 포켓몬 13마리 더 보기" width="96%" align="middle"></picture></summary>
+<summary><picture><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/_more.b19811be.svg" alt="나머지 포켓몬 14마리 더 보기" width="96%" align="middle"></picture></summary>
 <br>
 <div align="center">
 
@@ -34,6 +34,7 @@
 <a href="https://github.com/taku7664/ppakemon-vps-backup-auth" title="동미러 · taku7664/ppakemon-vps-backup-auth · 커밋 1회 · 병합 PR 0개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/taku7664__ppakemon-vps-backup-auth.fb07c9ef.svg" alt="동미러 Lv.6" width="32%"></a>
 <a href="https://github.com/taku7664/RoundingBlock" title="타랜툴라 · taku7664/RoundingBlock · 커밋 1회 · 병합 PR 0개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/taku7664__RoundingBlock.7e0d1c16.svg" alt="타랜툴라 Lv.5" width="32%"></a>
 <a href="https://github.com/taku7664/DemoMaker" title="토중몬 · taku7664/DemoMaker · 커밋 0회 · 병합 PR 0개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/taku7664__DemoMaker.70e0cac7.svg" alt="토중몬 Lv.1" width="32%"></a>
+<a href="https://github.com/taku7664/GitAccounter" title="니드런♂ · taku7664/GitAccounter · 커밋 0회 · 병합 PR 0개"><img src="https://raw.githubusercontent.com/taku7664/taku7664/HEAD/cards/taku7664__GitAccounter.84bd1be0.svg" alt="니드런♂ Lv.1" width="32%"></a>
 
 </div>
 </details>
