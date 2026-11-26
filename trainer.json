@@ -211,14 +211,14 @@
       "mon": 436
     },
     "taku7664/jbro-webd": {
-      "exp": 7750,
+      "exp": 13250,
       "caught": true,
       "species": 582,
       "stars": 0,
-      "commits": 31,
+      "commits": 53,
       "merges": 0,
       "alive": true,
-      "level": 18,
+      "level": 21,
       "mon": 582
     }
   },
@@ -345,9 +345,9 @@
     }
   },
   "trainer": {
-    "grassExp": 34000
+    "grassExp": 34100
   },
-  "updatedAt": "2026-11-25",
+  "updatedAt": "2026-11-26",
   "exp": {
     "commitOwn": 250,
     "commitExternal": 600,

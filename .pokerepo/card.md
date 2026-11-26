@@ -6,7 +6,7 @@
 <td align="center" valign="bottom" width="146" height="64"><a href="https://wantaekchoi.github.io/pokerepo/?u=taku7664&m=508" title="Stoutland in the Dex"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/508.png" width="64" height="64" alt="stoutland"></a></td>
 <td align="center" valign="bottom" width="146" height="64"><a href="https://wantaekchoi.github.io/pokerepo/?u=taku7664&m=289" title="Slaking in the Dex"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/289.png" width="64" height="64" alt="slaking"></a></td>
 <td align="center" valign="bottom" width="146" height="64"><a href="https://wantaekchoi.github.io/pokerepo/?u=taku7664&m=509" title="Purrloin in the Dex"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/509.png" width="64" height="64" alt="purrloin"></a></td>
-<td align="center" valign="bottom" width="146" height="64"><a href="https://wantaekchoi.github.io/pokerepo/?u=taku7664&m=140" title="Kabuto in the Dex"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/140.png" width="64" height="64" alt="kabuto"></a></td>
+<td align="center" valign="bottom" width="146" height="64"><a href="https://wantaekchoi.github.io/pokerepo/?u=taku7664&m=32" title="Nidoran-M in the Dex"><img src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/32.png" width="64" height="64" alt="nidoran-m"></a></td>
 </tr>
 <tr>
 <td align="center" valign="top" nowrap><a href="https://wantaekchoi.github.io/pokerepo/?u=taku7664&m=169"><b>Crobat</b></a><br><sub>Lv.92</sub><br><sub><a href="https://github.com/Scarecrow37/VanishingGround" title="Scarecrow37/VanishingGround">VanishingGr…</a></sub></td>
@@ -14,7 +14,7 @@
 <td align="center" valign="top" nowrap><a href="https://wantaekchoi.github.io/pokerepo/?u=taku7664&m=508"><b>Stoutland</b></a><br><sub>Lv.50</sub><br><sub><a href="https://github.com/2024-4Q-Super-Project-Team/The-Project-J" title="2024-4Q-Super-Project-Team/The-Project-J">The-Project…</a></sub></td>
 <td align="center" valign="top" nowrap><a href="https://wantaekchoi.github.io/pokerepo/?u=taku7664&m=289"><b>Slaking</b></a><br><sub>Lv.46</sub><br><sub><a href="https://github.com/taku7664/JBroEngine" title="taku7664/JBroEngine">JBroEngine</a></sub></td>
 <td align="center" valign="top" nowrap><a href="https://wantaekchoi.github.io/pokerepo/?u=taku7664&m=509"><b>Purrloin</b></a><br><sub>Lv.15</sub><br><sub><a href="https://github.com/taku7664/better-kor" title="taku7664/better-kor">better-kor</a></sub></td>
-<td align="center" valign="top" nowrap><a href="https://wantaekchoi.github.io/pokerepo/?u=taku7664&m=140"><b>Kabuto</b></a><br><sub>Lv.1</sub><br><sub><a href="https://github.com/tt-a1i/archify" title="tt-a1i/archify">archify</a></sub></td>
+<td align="center" valign="top" nowrap><a href="https://wantaekchoi.github.io/pokerepo/?u=taku7664&m=32"><b>Nidoran-M</b></a><br><sub>Lv.1</sub><br><sub><a href="https://github.com/taku7664/GitAccounter" title="taku7664/GitAccounter">GitAccounter</a></sub></td>
 </tr>
 </table>
 
